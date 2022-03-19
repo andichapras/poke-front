@@ -50,5 +50,6 @@
   "bugs": {
     "url": "https://github.com/andichapras/poke-front/issues"
   },
-  "homepage": "https://github.com/andichapras/poke-front#readme"
+  "homepage": ".",
+  "proxy": "http://localhost:3000"
 }
