@@ -1,17 +1,18 @@
 import React from 'react'
 
 import Header from './Header/Header'
+import css from './Layout.module.css'
 
 const Layout = (props) => {
     return(
-        <React.Fragment>
+        <div className={css.Body}>
             <header>
                 <Header/>
             </header>
-            <main>
+            <main className={css.Main}>
                 {props.children}
             </main>
-        </React.Fragment>
+        </div>
     )
 }
 

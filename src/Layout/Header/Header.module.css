@@ -1,0 +1,18 @@
+.Top {
+    width: 100%;
+    background-color: #5EE6EB;
+    margin: 0;
+    height: 100px;
+    text-align: center;
+    
+}
+
+.Brand {
+    padding: 25px;
+    margin: 0;
+    color: black;
+}
+
+.Link {
+    text-decoration: none;
+}
