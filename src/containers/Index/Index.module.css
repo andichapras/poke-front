@@ -1,4 +1,9 @@
-.Plate {
-    margin: 5px;
-    border: 1px solid black;
+.pokeCard {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+.poke {
+    margin: 0 auto;
 }

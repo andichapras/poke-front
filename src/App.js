@@ -5,6 +5,7 @@ import './App.css';
 import Layout from './Layout/Layout'
 import Home from './containers/Home/Home'
 import Index from './containers/Index/Index'
+import PokemonDetail from './containers/Index/PokemonDetail/PokemonDetail'
 import MyPokemon from './containers/MyPokemon/MyPokemon'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/index" element={<Index/>}/>
+          <Route path="/index/:pokedetail" element={<PokemonDetail/>}/>
           <Route path="/mine" element={<MyPokemon/>}/>
         </Routes>
       </Layout>

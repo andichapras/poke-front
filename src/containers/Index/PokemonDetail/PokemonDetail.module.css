@@ -1,0 +1,27 @@
+.divName {
+    margin: 10px 0;
+}
+
+.css.top {
+    display: block;
+    margin: 0 25px;
+    float: left;
+}
+
+.type {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.listMoves {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.move {
+    display: block;
+    float:left;
+    width: 150px;
+    margin: 10px 5px;
+    padding: 10px;
+}

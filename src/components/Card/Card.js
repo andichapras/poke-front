@@ -1,15 +1,15 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 import css from './Card.module.css'
 
 const Card = (props) => {
     return (
-            <NavLink to={props.to} className={css.Link}>
+            <Link to={props.to} className={css.Link} onClick={props.onClick}>
                 <div className={css.Plate}>
                     {props.children}
                 </div>
-            </NavLink>
+            </Link>
     )
 }
 export default Card
