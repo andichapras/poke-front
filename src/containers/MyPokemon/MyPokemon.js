@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Container, Row, Col, Modal, Image, ModalTitle, Button} from 'react-bootstrap'
+import {Container, Row, Col, Modal, Image, ModalTitle, Button, Form} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom'
 
 import css from './MyPokemon.module.css'
@@ -10,22 +10,25 @@ import Spinner from '../../components/loading/Spinner'
 
 const MyPokemon = () => {
     const navigate = useNavigate()
+
     const {isLoading, error, sendRequest, clearError} = useHttpClient()
     const [loadedPokemon, setLoadedPokemon] = useState()
-    const [modal, setModal] = useState(false)
 
     useEffect(() => {
         const fetchPokemon = async () => {
             try {
                 const responseData = await sendRequest('http://localhost:5000/mine/')
                 setLoadedPokemon(responseData.myPokemon)
+                
             } catch (err) {}
         }
         fetchPokemon()
+        
     }, [sendRequest])
 
     const openModal = (p) => {
         let newMyPokemon = [...loadedPokemon]
+        console.log(loadedPokemon)
         newMyPokemon[p].modal = true
         setLoadedPokemon(newMyPokemon)
     }
@@ -36,6 +39,42 @@ const MyPokemon = () => {
             p.modal = false
         })
         setLoadedPokemon(newMyPokemon)
+    }
+
+    const renamePokemon = async (event, idx) => {
+        event.preventDefault()
+        const pokeId = loadedPokemon[idx].id
+        try {
+            await sendRequest(
+                `http://localhost:5000/mine/${pokeId}`, 
+                'PATCH', 
+                JSON.stringify({}), 
+                {
+                    'Content-Type': 'application/json'
+                }
+            )
+            navigate("/")
+        } catch (err) {
+
+        }
+    }
+    
+    const releasePokemon = async (event, idx) => {
+        event.preventDefault()
+        const pokeId = loadedPokemon[idx].id
+        try {
+            await sendRequest(
+                `http://localhost:5000/mine/${pokeId}`, 
+                'DELETE', 
+                JSON.stringify({}), 
+                {
+                    'Content-Type': 'application/json'
+                }
+            )
+            navigate("/")
+        } catch (err) {
+
+        }
     }
 
     return (
@@ -60,7 +99,7 @@ const MyPokemon = () => {
                     <Row>
                         {loadedPokemon.map((poke, idx) => (
                             <Col xs={12} md={3} lg={2}>
-                                <Button onClick={() => openModal(idx)}>
+                                <Button className={css.Card} onClick={() => openModal(idx)}>
                                     <div>
                                         {poke.pokemon}
                                     </div>
@@ -85,8 +124,12 @@ const MyPokemon = () => {
                                 <ModalTitle>{pokemon.pokemon}, nama: {pokemon.name}</ModalTitle>
                             </Modal.Header>
                             <Modal.Body>
-                                <Button variant="primary">Rename</Button>
-                                <Button variant="danger">Release</Button>
+                                <Form onSubmit={(e) => renamePokemon(e, idx)}>
+                                    <Button variant="primary" type="submit">Rename</Button>
+                                </Form>
+                                <Form onSubmit={(e) => releasePokemon(e, idx)}>
+                                    <Button variant="danger" type="submit">Release</Button>
+                                </Form>
                             </Modal.Body>
                         </Modal>
                     )
